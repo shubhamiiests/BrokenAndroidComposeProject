@@ -1,11 +1,10 @@
 package com.greedygame.brokenandroidcomposeproject.ui.viewModel
 
-import com.greedygame.brokenandroidcomposeproject.data.ArticleRepositoryContract
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.greedygame.brokenandroidcomposeproject.data.Article
-import com.greedygame.brokenandroidcomposeproject.data.ArticleRepository
+import com.greedygame.brokenandroidcomposeproject.data.ArticleRepositoryContract
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest

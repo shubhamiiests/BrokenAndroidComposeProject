@@ -44,7 +44,6 @@ class ArticleRepository(
         }
     }
 
-    // ---- interface functions ----
     override suspend fun getArticle(id: Int): Article? = withContext(ioDispatcher) {
         articleDao.getArticleById(id)
     }
@@ -53,12 +52,6 @@ class ArticleRepository(
         articleDao.update(article)
     }
 
-    // ----------------- internal helpers -----------------
-
-    /**
-     * Network-only; let exceptions bubble up so refreshArticles()
-     * can distinguish "no internet" vs success.
-     */
     private suspend fun tryFetchFromNetwork(): List<Article> {
         val response = api.getArticles()
         val dtoList = response.articles.orEmpty()
@@ -73,9 +66,6 @@ class ArticleRepository(
         }
     }
 
-    /**
-     * Parses the intentionally broken JSON but maps it correctly to [Article].
-     */
     private fun parseFakeJson(): List<Article> {
         val fakeJson = """
             [

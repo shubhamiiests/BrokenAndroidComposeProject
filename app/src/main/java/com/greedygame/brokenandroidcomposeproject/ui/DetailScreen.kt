@@ -49,7 +49,6 @@ fun DetailScreen(
 
     val current = article
 
-    // ------- Not found -------
     if (current == null) {
         Column(
             modifier = Modifier
@@ -95,7 +94,6 @@ fun DetailScreen(
                     .padding(16.dp)
             ) {
 
-                // Title
                 Text(
                     text = current.title,
                     style = MaterialTheme.typography.headlineSmall,
@@ -113,7 +111,6 @@ fun DetailScreen(
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Image
                 if (!current.imageUrl.isNullOrBlank()) {
                     AsyncImage(
                         model = current.imageUrl,

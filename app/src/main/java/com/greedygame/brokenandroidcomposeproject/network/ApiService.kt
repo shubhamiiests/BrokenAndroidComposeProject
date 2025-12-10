@@ -5,7 +5,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
-// DTOs matching the NewsAPI style response
 data class NewsResponse(
     @SerializedName("status") val status: String?,
     @SerializedName("totalResults") val totalResults: Int?,
