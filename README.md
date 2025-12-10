@@ -1,5 +1,5 @@
 
-### 1 Key issues identified
+### 1. Key issues identified
 
 #### Architecture / Data layer
 - **Blocking network call on main thread**
@@ -38,7 +38,7 @@
   - No tests around the new architecture or ViewModel behavior.
 
 
-### 2 How I solved them
+### 2. How I solved them
 
 #### Clean data layer with Room + Retrofit + Repository
 
@@ -178,7 +178,7 @@
       - Uses StandardTestDispatcher and runTest to control coroutine timing.
 
 
-### 3 Improvements beyond bug fixing
+### 3. Improvements beyond bug fixing
 
 - **Architecture**
   - Introduced a proper Repository + Room + Retrofit stack.
@@ -195,7 +195,7 @@
   - Reactive updates using Flow + StateFlow from Room ensure UI stays in sync with DB changes.
 
 
-### 4 Assumptions made
+### 4. Assumptions made
 
 - **API contract**
   - Assumed NewsAPI’s `/v2/everything` schema with status, totalResults, and articles fields, and that the fields used (title, author, content, urlToImage) are available.
