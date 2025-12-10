@@ -155,9 +155,9 @@ fun DetailScreen(
                         viewModel.updateArticle(updated)
                     },
                     modifier = Modifier.fillMaxWidth()
-                ) {
+                ) /*{
                     Text("Save changes")
-                }
+                }*/
             }
         }
     }
