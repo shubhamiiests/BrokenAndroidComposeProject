@@ -65,7 +65,6 @@ class NewsViewModel(
 
     suspend fun getArticle(id: Int): Article? = repository.getArticle(id)
 
-    // Simple factory so MainActivity can provide the repository
     class Factory(private val repository: ArticleRepositoryContract) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
