@@ -38,8 +38,6 @@
   - No tests around the new architecture or ViewModel behavior.
 
 
----
-
 ### 2 How I solved them
 
 #### Clean data layer with Room + Retrofit + Repository
@@ -179,7 +177,6 @@
       - Verifies refresh() moves the state to Error when repository fails.
       - Uses StandardTestDispatcher and runTest to control coroutine timing.
 
----
 
 ### 3 Improvements beyond bug fixing
 
@@ -197,7 +194,6 @@
   - All heavy IO now runs off the main thread.
   - Reactive updates using Flow + StateFlow from Room ensure UI stays in sync with DB changes.
 
----
 
 ### 4 Assumptions made
 
@@ -217,6 +213,6 @@
 - **Scope of UI changes**
   - Focused on improving readability and basic UX without introducing complex animations, theming systems, or multi-module architecture.
 
----
+
 
 ### Time Taken: Approx 3.5 hours in debuggind and optmising the UI
