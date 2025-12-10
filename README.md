@@ -3,7 +3,7 @@
 
 #### Architecture / Data layer
 - **Blocking network call on main thread**
-    - BrokenRepository.fetchArticlesBlocking()` used `Thread.sleep(2000)` and data were returned synchronously.
+    - BrokenRepository.fetchArticlesBlocking() used Thread.sleep(2000) and data were returned synchronously.
     - NewsScreen called this through GlobalScope.launch(Dispatchers.Main), which is not lifecycle aware and also risks leakage and crashes.
 
 - **No proper data source separation or caching**
@@ -19,7 +19,7 @@
     - AppDatabase was declared but it neither had Dao nor had singleton getInstance implementation.
 
 #### UI / State management
-- **State handled completely inside composables**
+- **State handled completely inside composable**
     - NewsScreen managed loading, error, and data state locally with mutable state.
     - This made it hard to share data between screens and to test.
 

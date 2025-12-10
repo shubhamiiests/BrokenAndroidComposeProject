@@ -16,22 +16,13 @@ class ArticleRepository(
 
     private val articleDao = database.articleDao()
 
-    // ---- interface property ----
     override val articles: Flow<List<Article>> = articleDao.getArticles()
 
-    /**
-     * Refreshes local cache.
-     * 1. Tries network on IO dispatcher.
-     * 2. If server returns empty list → falls back to bundled fake JSON.
-     * 3. If network throws (no internet, etc.) → returns Result.failure(...)
-     */
     override suspend fun refreshArticles(): Result<Unit> = withContext(ioDispatcher) {
         try {
             val networkArticles = tryFetchFromNetwork()
 
-            val finalList = if (networkArticles.isNotEmpty()) {
-                networkArticles
-            } else {
+            val finalList = networkArticles.ifEmpty {
                 parseFakeJson()
             }
 
@@ -39,7 +30,7 @@ class ArticleRepository(
             articleDao.insertAll(finalList)
             Result.success(Unit)
         } catch (e: Exception) {
-            // UI (NewsViewModel) will decide how to show this error
+
             Result.failure(e)
         }
     }
@@ -57,7 +48,7 @@ class ArticleRepository(
         val dtoList = response.articles.orEmpty()
         return dtoList.mapIndexed { index, dto ->
             Article(
-                id = index + 1,              // backend doesn't give stable id
+                id = index + 1,
                 title = dto.title ?: "Untitled",
                 author = dto.author,
                 content = dto.content,

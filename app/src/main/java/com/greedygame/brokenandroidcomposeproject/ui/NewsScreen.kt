@@ -126,7 +126,6 @@ private fun ArticleRow(
                 .padding(12.dp)
         ) {
 
-            // Thumbnail (if image is present)
             if (!article.imageUrl.isNullOrBlank()) {
                 AsyncImage(
                     model = article.imageUrl,
@@ -137,7 +136,7 @@ private fun ArticleRow(
                 )
                 Spacer(modifier = Modifier.width(12.dp))
             } else {
-                // Simple circular accent when there is no image
+
                 Box(
                     modifier = Modifier
                         .size(40.dp)
