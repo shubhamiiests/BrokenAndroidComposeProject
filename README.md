@@ -215,4 +215,4 @@
 
 
 
-### Time Taken: Approx 5 hours in debugging and optimising the UI
+### Time Taken: Approx 5.5 hours in debugging and optimising the UI
