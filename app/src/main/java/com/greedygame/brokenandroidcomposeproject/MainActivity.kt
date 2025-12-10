@@ -12,7 +12,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -43,27 +42,36 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Surface {
-                val navController = rememberNavController()
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val canNavigateBack = navBackStackEntry?.destination?.route != "news"
-                Scaffold(
-                    topBar = {
-                        CenterAlignedTopAppBar(
-                            title = { Text("Broken News") },
-                            navigationIcon = {
-                                if (canNavigateBack) {
-                                    IconButton(onClick = { navController.navigateUp() }) {
-                                        Icon(
-                                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                            contentDescription = "Back"
-                                        )
-                                    }
+            val navController = rememberNavController()
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = navBackStackEntry?.destination?.route
+            val canNavigateBack = currentRoute != "news"
+
+            Scaffold(
+                topBar = {
+                    CenterAlignedTopAppBar(
+                        title = {
+                            Text(
+                                text = if (currentRoute?.startsWith("detail") == true) {
+                                    "Article details"
+                                } else {
+                                    "Broken News"
+                                }
+                            )
+                        },
+                        navigationIcon = {
+                            if (canNavigateBack) {
+                                IconButton(onClick = { navController.navigateUp() }) {
+                                    Icon(
+                                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                        contentDescription = "Back"
+                                    )
                                 }
                             }
-                        )
-                    }
-                ) { innerPadding ->
+                        }
+                    )
+                }
+            ) { innerPadding ->
                     NavHost(
                         navController = navController,
                         startDestination = "news",
@@ -93,4 +101,3 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
