@@ -1,28 +1,24 @@
 package com.greedygame.brokenandroidcomposeproject.data
 
-import com.google.gson.Gson
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+// Room entity used in the app
+@Entity(tableName = "articles")
 data class Article(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val title: String,
     val author: String?,
     val content: String?,
     val imageUrl: String?
 )
 
-object BrokenRepository {
-    fun fetchArticlesBlocking(): List<Article> {
-        Thread.sleep(2000)
-        val fakeJson = "[{\"identifier\":1,\"heading\":\"Hello\",\"writer\":\"Alice\"}]"
-        val gson = Gson()
-        val articles: Array<Article> = try {
-            gson.fromJson(fakeJson, Array<Article>::class.java)
-        } catch (e: Exception) {
-            emptyArray()
-        }
-        return articles.toList()
-    }
-
-    fun updateArticle(article: Article) {
-    }
-}
+// DTO used to parse the intentionally-weird JSON
+// {"identifier":1,"heading":"Hello","writer":"Alice"}
+data class FakeArticleDto(
+    val identifier: Int,
+    val heading: String,
+    val writer: String?,
+    val content: String? = null,
+    val imageUrl: String? = null
+)
